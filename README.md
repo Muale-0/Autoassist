@@ -75,3 +75,8 @@ docs/                diagrama da arquitetura
 ```
 
 > Protótipo acadêmico. Não substitui a avaliação de um mecânico.
+
+Murilo Martins de Campos | RM572674 |
+| Arthur Palacio Alves | RM573441 |
+| Giovanni Lopez Zavam | RM571403 |
+| Thiago Andrade Silva Piedade | RM569741 |
