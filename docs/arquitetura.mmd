@@ -1,0 +1,52 @@
+flowchart TB
+    U(["👤 USUARIO<br/>motorista"]):::user
+
+    subgraph IN["ENTRADAS MULTIMODAIS"]
+        T["📝 Texto<br/>descricao / codigo DTC"]
+        I["📷 Imagem<br/>foto do painel"]
+        A["🎙️ Audio<br/>voz / ruido do motor"]
+        D["📈 Dados<br/>CSV telemetria OBD-II"]
+    end
+
+    U --> T & I & A & D
+
+    subgraph ORQ["🧭 ORCHESTRATOR AGENT"]
+        P1["1. Perceber<br/>valida modalidades"] --> P2["2. Interpretar<br/>intencao + codigos"] --> P3["3. Planejar rota"]
+    end
+
+    T & I & A & D --> P1
+
+    CTX[("🧠 CONTEXTO COMPARTILHADO<br/>blackboard: modalidades, intencao,<br/>resultados de cada agente, avisos")]:::ctx
+
+    P3 -- "se ha audio" --> AU["🎙️ AUDIO AGENT<br/>transcreve fala<br/>descreve ruidos"]:::agent
+    P3 -- "se ha imagem" --> VI["👁️ VISION AGENT<br/>luzes acesas<br/>ponteiros, mensagens"]:::agent
+    P3 -- "se ha CSV" --> DA["📊 DATA AGENT<br/>estatisticas e<br/>anomalias"]:::agent
+    P3 -- "sempre" --> ME["🔧 SPECIALIST AGENT<br/>mecanico: cruza evidencias<br/>e levanta hipoteses"]:::agent
+
+    DA <--> TL1[["🛠️ analisar_telemetria()<br/>pandas + limites"]]:::tool
+    ME <-- "function calling" --> TL2[["🛠️ consultar_luz_painel()<br/>consultar_codigo_dtc()"]]:::tool
+    TL2 --- KB[("📚 Base de conhecimento<br/>luzes, DTCs, limites")]:::kb
+    TL1 --- KB
+
+    AU & VI & DA -- escrevem --> CTX
+    CTX -- le --> ME
+    ME -- escreve --> CTX
+
+    CTX -- le --> RV["✅ REVIEWER AGENT<br/>consistencia entre fontes<br/>trava de seguranca<br/>consolidacao"]:::agent
+    RV <--> TL3[["🛠️ classificar_urgencia()<br/>regra deterministica"]]:::tool
+
+    RV --> F(["📋 RESPOSTA FINAL UNICA<br/>urgencia + o que foi visto +<br/>causas + proximos passos + limitacoes"]):::final
+    F --> U
+
+    LOG["📜 Registro do fluxo<br/>[INPUT] [ROUTING] [TOOL] [REVIEW] [FINAL] [ERRO]"]:::log
+    ORQ -.-> LOG
+
+    classDef user fill:#e0e7ff,stroke:#4338ca,color:#1e1b4b
+    classDef agent fill:#fef3c7,stroke:#b45309,color:#451a03
+    classDef tool fill:#ffedd5,stroke:#ea580c,color:#431407
+    classDef kb fill:#f3f4f6,stroke:#6b7280,color:#111827
+    classDef ctx fill:#dcfce7,stroke:#15803d,color:#052e16
+    classDef final fill:#fce7f3,stroke:#be185d,color:#500724
+    classDef log fill:#f8fafc,stroke:#94a3b8,color:#334155,stroke-dasharray:4 3
+    style ORQ fill:#ede9fe,stroke:#7c3aed
+    style IN fill:#eff6ff,stroke:#3b82f6

@@ -1,0 +1,106 @@
+{
+  "_descricao": "Base de conhecimento local (simplificada, para fins didaticos). Severidade: 1 = baixa, 2 = atencao, 3 = critica (parar o veiculo).",
+  "luzes_painel": {
+    "temperatura_motor": {
+      "nome": "Luz de temperatura do motor (termometro na agua)",
+      "cor": "vermelha",
+      "severidade": 3,
+      "significado": "Motor acima da temperatura segura de operacao (superaquecimento).",
+      "causas_comuns": ["nivel baixo de liquido de arrefecimento", "vazamento no radiador ou mangueiras", "eletroventilador inoperante", "valvula termostatica travada fechada", "bomba d'agua com defeito"],
+      "acao": "Parar o veiculo em local seguro, desligar o motor e aguardar esfriar. NAO abrir o reservatorio com o motor quente.",
+      "pode_rodar": false
+    },
+    "pressao_oleo": {
+      "nome": "Luz de pressao do oleo (almotolia)",
+      "cor": "vermelha",
+      "severidade": 3,
+      "significado": "Pressao de oleo insuficiente para lubrificar o motor.",
+      "causas_comuns": ["nivel de oleo baixo", "bomba de oleo com defeito", "sensor de pressao com falha", "vazamento de oleo"],
+      "acao": "Parar imediatamente e desligar o motor. Verificar o nivel de oleo com a vareta apos alguns minutos.",
+      "pode_rodar": false
+    },
+    "bateria": {
+      "nome": "Luz da bateria / sistema de carga",
+      "cor": "vermelha",
+      "severidade": 2,
+      "significado": "O sistema de carga (alternador) nao esta recarregando a bateria corretamente.",
+      "causas_comuns": ["correia do alternador rompida ou frouxa", "alternador com defeito", "regulador de tensao com falha", "terminais da bateria oxidados"],
+      "acao": "Desligar acessorios eletricos e seguir ate uma oficina proxima; o veiculo pode parar quando a bateria descarregar.",
+      "pode_rodar": true
+    },
+    "injecao_check_engine": {
+      "nome": "Luz de injecao eletronica / Check Engine",
+      "cor": "amarela",
+      "severidade": 2,
+      "significado": "A central do motor (ECU) registrou uma falha. Piscando indica falha de ignicao grave.",
+      "causas_comuns": ["falha de ignicao (velas/bobinas)", "sensor de oxigenio", "tampa do tanque mal fechada", "sensor MAP/MAF", "catalisador"],
+      "acao": "Ler os codigos de falha (DTC) com um scanner OBD-II. Se estiver PISCANDO, reduzir carga e evitar rodar.",
+      "pode_rodar": true
+    },
+    "freio": {
+      "nome": "Luz do sistema de freio",
+      "cor": "vermelha",
+      "severidade": 3,
+      "significado": "Freio de mao acionado ou nivel baixo de fluido de freio.",
+      "causas_comuns": ["freio de estacionamento puxado", "fluido de freio baixo", "pastilhas muito gastas", "vazamento no sistema hidraulico"],
+      "acao": "Verificar o freio de mao. Se a luz continuar acesa, nao rodar e verificar o fluido de freio.",
+      "pode_rodar": false
+    },
+    "abs": {
+      "nome": "Luz do ABS",
+      "cor": "amarela",
+      "severidade": 2,
+      "significado": "Sistema antitravamento desativado; o freio convencional continua funcionando.",
+      "causas_comuns": ["sensor de roda sujo ou danificado", "modulo ABS", "fusivel"],
+      "acao": "Dirigir com cautela, aumentar distancia de frenagem e agendar diagnostico.",
+      "pode_rodar": true
+    },
+    "airbag": {
+      "nome": "Luz do airbag",
+      "cor": "vermelha",
+      "severidade": 2,
+      "significado": "Sistema de airbag com falha; pode nao disparar em colisao.",
+      "causas_comuns": ["conector sob o banco solto", "cinta de airbag (hard-wire) do volante", "modulo de airbag"],
+      "acao": "Agendar diagnostico o quanto antes.",
+      "pode_rodar": true
+    },
+    "pressao_pneus": {
+      "nome": "Luz de pressao dos pneus (TPMS)",
+      "cor": "amarela",
+      "severidade": 2,
+      "significado": "Um ou mais pneus com pressao abaixo do recomendado.",
+      "causas_comuns": ["pneu furado", "calibragem baixa", "variacao de temperatura", "sensor TPMS"],
+      "acao": "Reduzir velocidade e calibrar os pneus no posto mais proximo.",
+      "pode_rodar": true
+    },
+    "combustivel_baixo": {
+      "nome": "Luz de reserva de combustivel",
+      "cor": "amarela",
+      "severidade": 1,
+      "significado": "Combustivel na reserva.",
+      "causas_comuns": ["nivel baixo de combustivel"],
+      "acao": "Abastecer em breve.",
+      "pode_rodar": true
+    }
+  },
+  "codigos_dtc": {
+    "P0300": {"descricao": "Falha de ignicao aleatoria/multiplos cilindros", "severidade": 2, "causas_comuns": ["velas desgastadas", "bobina de ignicao", "bico injetor", "vazamento de vacuo", "combustivel de baixa qualidade"], "verificacao": "Inspecionar velas e bobinas; testar bicos injetores; verificar vazamentos de vacuo."},
+    "P0301": {"descricao": "Falha de ignicao no cilindro 1", "severidade": 2, "causas_comuns": ["vela do cilindro 1", "bobina do cilindro 1", "bico injetor do cilindro 1"], "verificacao": "Trocar a bobina do cilindro 1 com outro cilindro e ver se a falha acompanha."},
+    "P0302": {"descricao": "Falha de ignicao no cilindro 2", "severidade": 2, "causas_comuns": ["vela do cilindro 2", "bobina do cilindro 2", "bico injetor do cilindro 2"], "verificacao": "Trocar a bobina do cilindro 2 com outro cilindro e ver se a falha acompanha."},
+    "P0171": {"descricao": "Mistura pobre (banco 1)", "severidade": 2, "causas_comuns": ["vazamento de vacuo", "sensor MAF sujo", "bomba de combustivel fraca", "filtro de combustivel entupido"], "verificacao": "Verificar mangueiras de vacuo, limpar sensor MAF e medir pressao de combustivel."},
+    "P0420": {"descricao": "Eficiencia do catalisador abaixo do limite (banco 1)", "severidade": 1, "causas_comuns": ["catalisador desgastado", "sonda lambda pos-catalisador", "vazamento no escapamento"], "verificacao": "Comparar sinais das sondas lambda pre e pos catalisador."},
+    "P0217": {"descricao": "Condicao de superaquecimento do motor", "severidade": 3, "causas_comuns": ["falta de liquido de arrefecimento", "eletroventilador", "valvula termostatica", "bomba d'agua"], "verificacao": "Com o motor frio, verificar nivel do arrefecimento, funcionamento do eletroventilador e vazamentos."},
+    "P0115": {"descricao": "Circuito do sensor de temperatura do motor (ECT)", "severidade": 2, "causas_comuns": ["sensor ECT com defeito", "chicote/conector danificado"], "verificacao": "Medir resistencia do sensor ECT e conferir conector."},
+    "P0128": {"descricao": "Temperatura do liquido de arrefecimento abaixo da temperatura de regulagem do termostato", "severidade": 1, "causas_comuns": ["valvula termostatica travada aberta", "sensor ECT"], "verificacao": "Verificar se o motor atinge ~90 C apos 10-15 min de uso."},
+    "P0562": {"descricao": "Tensao do sistema baixa", "severidade": 2, "causas_comuns": ["alternador", "bateria fraca", "correia do alternador", "mau contato nos terminais"], "verificacao": "Medir tensao da bateria com motor ligado (esperado 13,5-14,7 V)."},
+    "P0520": {"descricao": "Circuito do sensor de pressao de oleo", "severidade": 2, "causas_comuns": ["sensor de pressao de oleo", "chicote", "pressao real baixa"], "verificacao": "Medir pressao de oleo com manometro mecanico para confirmar se e sensor ou pressao real."},
+    "P0455": {"descricao": "Vazamento grande no sistema EVAP", "severidade": 1, "causas_comuns": ["tampa do tanque solta", "mangueira EVAP rachada", "valvula purga"], "verificacao": "Conferir tampa do tanque e fazer teste de fumaca no sistema EVAP."},
+    "P0101": {"descricao": "Sensor MAF fora da faixa/desempenho", "severidade": 2, "causas_comuns": ["sensor MAF sujo", "filtro de ar obstruido", "vazamento apos o MAF"], "verificacao": "Limpar o sensor MAF com produto especifico e verificar filtro de ar."}
+  },
+  "limites_telemetria": {
+    "temp_motor_c": {"normal_max": 105, "critico_max": 112, "unidade": "C", "luz_relacionada": "temperatura_motor", "dtc_relacionado": "P0217"},
+    "tensao_bateria_v": {"normal_min": 13.2, "critico_min": 12.0, "normal_max": 14.8, "unidade": "V", "luz_relacionada": "bateria", "dtc_relacionado": "P0562", "obs": "valores com motor ligado"},
+    "pressao_oleo_bar": {"normal_min": 1.0, "critico_min": 0.5, "unidade": "bar", "luz_relacionada": "pressao_oleo", "dtc_relacionado": "P0520", "obs": "valores com motor ligado"},
+    "rpm": {"marcha_lenta_desvio_max": 80, "unidade": "rpm", "luz_relacionada": "injecao_check_engine", "dtc_relacionado": "P0300", "obs": "oscilacao em marcha lenta (velocidade 0) sugere falha de ignicao"}
+  }
+}
